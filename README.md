@@ -14,6 +14,7 @@ El proyecto consiste en una página web de nombre *Musicy* en la cual los usuari
 7. Da click en el botón "¿Añadir?" para crear una instancia
 8. Llena el formulario
 9. En la página del módulo, escribe en el buscador el nombre de la instancia creada (primer casilla del formulario)
+10. Repite para cuantos módulos sean necesarios
 
 **Admin login:**
 ``Name: Rookmin |
