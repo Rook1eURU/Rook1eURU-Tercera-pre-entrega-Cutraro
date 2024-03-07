@@ -15,5 +15,26 @@ Los expresores de arte.
 
 <!-- BUSCADOR-->
 {% block buscador %}
+<form action="/AppMusicy/artistRead/" method="GET"> {% csrf_token %}
+
+    <input type="text" name="name" id="name">
+    <input type="submit" value="Buscar">
+    <button>
+        <a href="/AppMusicy/artistCreate/">¿Añadir?</a>
+    </button>
+    
+    <br>
+
+</form>
+
+<p>
+    Resultados para: {{name}}
+</p>
+{% for artista in artist %}
+<p>
+    > {{artista.name}}
+</p>
+{% endfor %}
+
 
 {% endblock %}

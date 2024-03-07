@@ -19,6 +19,7 @@ class Artist(models.Model):
         return f"{self.name}"
     
     name = models.CharField(max_length=60)
+    songs = models.CharField(max_length=60)
     albums = models.CharField(max_length=60)
 
 class Album(models.Model):

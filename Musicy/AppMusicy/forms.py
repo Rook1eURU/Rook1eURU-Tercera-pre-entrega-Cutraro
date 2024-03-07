@@ -11,6 +11,7 @@ class SongFormulario(forms.Form):
 class ArtistFormulario(forms.Form):
 
     name = forms.CharField()
+    songs = forms.CharField()
     albums = forms.CharField()
 
 class AlbumFormulario(forms.Form):
