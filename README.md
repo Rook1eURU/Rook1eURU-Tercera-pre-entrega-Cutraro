@@ -5,6 +5,9 @@ v1.0 - 06/03/2024
 Name: Rookmin |
 Pass: pyton1234r
 
+**Link:**
+https://[Local host]/AppMusicy/
+
 **Descripción:**
 El proyecto consiste en una página web de nombre *Musicy* en la cual los usuarios pueden buscar traducciones de las letras de distintas canciones. En la versión final, cada canción tendrá su propia página, con información relevante, un video de youtube, y la letra tanto original como traducida al idioma deseado. Si una canción, artista, álbum o género no existe en la BD, el usuario lo podrá ingresar junto a la información necesaria. Por el momento, sólo es posible añadir manualmente a cada canción, artista, álbum o género.
 
