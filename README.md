@@ -1,6 +1,12 @@
 # Pre-entrega 3 | Leonardo Cutraro | Musicy
 v1.0 - 06/03/2024
 
+**SETUP:**
+1. Descargar el repositorio en formato zip
+2. Extraer y abrir con Visual Studio Code o el IDE de preferencia
+3. 
+Seleccionar pestaña de módulo a probar > Dar click en el botón "¿Añadir?" para crear una instancia > Llenar el formulario > En la página del módulo, escribir en el buscador el nombre de la instancia creada (primer casilla del formulario)
+
 **Admin login:**
 Name: Rookmin |
 Pass: pyton1234r
@@ -40,7 +46,5 @@ El proyecto cuenta con 4 módulos (* indica características por añadir):
     - Canciones
 
 Cada uno de estos módulos puede accederse desde las pestañas que se encuentran en la parte superior derecha de la pantalla. Esto llevará al usuario a una página donde podran buscar en las bases de datos de distintos módulos, o crear una nueva entrada en cualquiera de ellas. A su vez, hay una página principal que puede accederse dando click en el nombre de la página, en la parte superior izquierda.
-
-Seleccionar pestaña de módulo a probar > Dar click en el botón "¿Añadir?" para crear una instancia > Llenar el formulario > En la página del módulo, escribir en el buscador el nombre de la instancia creada (primer casilla del formulario)
 
 A su vez, en la versión final del programa, los módulos se relacionarán entre si, creando nuevas instancias que se ramifiquen de nuevas entradas en los otros módulos. Por ejemplo al ingresar una canción con un Artista que no esté en la BD, se ingresará el mismo en esta, sin la necesidad de ingresarlo manualmente. Si se ingresa una canción con un artista ya existente, la canción se añadirá a la lista de canciones de dicho Artista.
