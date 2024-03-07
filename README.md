@@ -7,7 +7,7 @@ El proyecto consiste en una página web de nombre *Musicy* en la cual los usuari
 **SETUP Y USO:**
 1. Descargar el repositorio en formato zip
 2. Extraer y abrir con Visual Studio Code o el IDE de preferencia
-3. En la consola, dirigirse a la carpeta Musicy (cd Musicy) e ingresar el comando ``python manage.py runserver``
+3. En la consola, dirigirse a la carpeta Musicy con el comando ``cd Musicy`` e ingresar el comando ``python manage.py runserver``
 4. El comando devolverá un link. Copiar el link, pegarlo en tu navegador y añadir al final ``/AppMusicy/``
 5. Una vez dentro de la página, podrás ver todos los módulos en forma de pestaña arriba a la derecha
 6. Seleccionar pestaña de módulo a probar
