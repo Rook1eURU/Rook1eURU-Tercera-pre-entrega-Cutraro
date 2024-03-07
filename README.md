@@ -1,53 +1,41 @@
-Objetivos generales:
-    - Desarrollar una WEB Django con patrón MVT subida a Github.
+# Pre-entrega 3 | Leonardo Cutraro | Musicy
+v1.0 - 06/03/2024
 
-Se debe entregar:
-    - Link de GitHub con el proyecto totalmente subido a la plataforma.
-    - Proyecto Web Django con patrón MVT que incluya:
-        Herencia de HTML.
-        Por lo menos 3 clases en models.
-        Un formulario para insertar datos a todas las clases de tu models.
-        Un formulario para buscar algo en la BD
-        Readme que indique el orden en el que se prueban las cosas y/o donde están las funcionalidades.
+**Admin login**
+Name: Rookmin
+Pass: pyton1234r
 
-Formato:
-    - Link al repositorio de GitHub con el nombre “Tercera pre-entrega+Apellido”.
+**Descripción**
+El proyecto consiste en una página web de nombre *Musicy* en la cual los usuarios pueden buscar traducciones de las letras de distintas canciones. En la versión final, cada canción tendrá su propia página, con información relevante, un video de youtube, y la letra tanto original como traducida al idioma deseado. Si una canción, artista, álbum o género no existe en la BD, el usuario lo podrá ingresar junto a la información necesaria. Por el momento, sólo es posible añadir manualmente a cada canción, artista, álbum o género.
 
-Página:
-    Página que permite traducir letras de canciones
-    Los puntos marcados con * serán objetivos opcionales, a añadir en la versión final
-    INICIO:
-        - Búsqueda de:
-            - Canciones
-            - Artistas
-            - Álbumes
-    CLASES:
-        - Canción
-            - Artista
-            - Álbum
-            - Año
-            - Género
-            - Video de YouTube*
-            - Letra original*
-            - Traducción*
-        - Artista
-            - Nombre
-            - Álbumes
-            - Tipo:
-                - Persona:
-                    - Nacionalidad
-                    - Año de nacimiento y fallecimiento
-                    - Sexo
-                    - Banda (si pertenece)
-                - Banda*:
-                    - Miembros*
-                    - Año de formación y separación*
-        - Álbum
-            - Imágen
-            - Artista
-            - Año
-            - Género
-            - Productora*
-            - Canciones
-        - Género
-            - Canciones
+**Funcionalidades**
+El proyecto cuenta con 4 módulos (* indica características por añadir):
+
+- Canción
+    - Título
+    - Artista
+    - Álbum
+    - Año
+    - Género
+    - Video de YouTube*
+    - Letra original*
+    - Traducción*
+- Artista
+    - Nombre
+    - Canciones
+    - Álbumes
+- Álbum
+    - Título
+    - Artista
+    - Año
+    - Género
+    - Canciones
+    - Imágen*
+    - Productora*
+- Género
+    - Nombre
+    - Canciones
+
+Cada uno de estos módulos puede accederse desde las pestañas que se encuentran en la parte superior derecha de la pantalla. Esto llevará al usuario a una página donde podran buscar en las bases de datos de distintos módulos, o crear una nueva entrada en cualquiera de ellas. A su vez, hay una página principal que puede accederse dando click en el nombre de la página, en la parte superior izquierda.
+
+A su vez, en la versión final del programa, los módulos se relacionarán entre si, creando nuevas instancias que se ramifiquen de nuevas entradas en los otros módulos. Por ejemplo al ingresar una canción con un Artista que no esté en la BD, se ingresará el mismo en esta, sin la necesidad de ingresarlo manualmente. Si se ingresa una canción con un artista ya existente, la canción se añadirá a la lista de canciones de dicho Artista.
