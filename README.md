@@ -1,11 +1,16 @@
 # Pre-entrega 3 | Leonardo Cutraro | Musicy
 v1.0 - 06/03/2024
 
-**SETUP:**
+**SETUP Y USO:**
 1. Descargar el repositorio en formato zip
 2. Extraer y abrir con Visual Studio Code o el IDE de preferencia
-3. 
-Seleccionar pestaña de módulo a probar > Dar click en el botón "¿Añadir?" para crear una instancia > Llenar el formulario > En la página del módulo, escribir en el buscador el nombre de la instancia creada (primer casilla del formulario)
+3. En la consola, dirigirse a la carpeta Musicy (cd Musicy) e ingresar el comando ``python manage.py runserver``
+4. El comando devolverá un link. Copiar el link, pegarlo en tu navegador y añadir al final ``/AppMusicy/``
+5. Una vez dentro de la página, podrás ver todos los módulos en forma de pestaña arriba a la derecha
+6. Seleccionar pestaña de módulo a probar
+7. Dar click en el botón "¿Añadir?" para crear una instancia
+8. Llenar el formulario
+9. En la página del módulo, escribir en el buscador el nombre de la instancia creada (primer casilla del formulario)
 
 **Admin login:**
 Name: Rookmin |
