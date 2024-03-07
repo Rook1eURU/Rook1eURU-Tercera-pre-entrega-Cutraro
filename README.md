@@ -38,4 +38,6 @@ El proyecto cuenta con 4 módulos (* indica características por añadir):
 
 Cada uno de estos módulos puede accederse desde las pestañas que se encuentran en la parte superior derecha de la pantalla. Esto llevará al usuario a una página donde podran buscar en las bases de datos de distintos módulos, o crear una nueva entrada en cualquiera de ellas. A su vez, hay una página principal que puede accederse dando click en el nombre de la página, en la parte superior izquierda.
 
+Seleccionar pestaña de módulo a probar > Dar click en el botón "¿Añadir?" para crear una instancia > Llenar el formulario > En la página del módulo, escribir en el buscador el nombre de la instancia creada (primer casilla del formulario)
+
 A su vez, en la versión final del programa, los módulos se relacionarán entre si, creando nuevas instancias que se ramifiquen de nuevas entradas en los otros módulos. Por ejemplo al ingresar una canción con un Artista que no esté en la BD, se ingresará el mismo en esta, sin la necesidad de ingresarlo manualmente. Si se ingresa una canción con un artista ya existente, la canción se añadirá a la lista de canciones de dicho Artista.
