@@ -2,7 +2,7 @@
 v1.0 - 06/03/2024
 
 **Admin login**
-Name: Rookmin
+Name: Rookmin\n
 Pass: pyton1234r
 
 **Descripción**
