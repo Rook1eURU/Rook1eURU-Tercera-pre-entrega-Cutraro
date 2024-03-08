@@ -34,16 +34,16 @@
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
-  --bs-primary: #2937f0;
-  --bs-secondary: #9f1ae2;
+  --bs-primary: #004475;
+  --bs-secondary: #00cabe;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
   --bs-warning: #ffc107;
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-primary-rgb: 41, 55, 240;
-  --bs-secondary-rgb: 159, 26, 226;
+  --bs-primary-rgb: 0, 68, 117;
+  --bs-secondary-rgb: 0, 202, 190;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 255, 193, 7;
@@ -10834,7 +10834,7 @@ html {
 }
 
 .bg-gradient-primary-to-secondary {
-  background: linear-gradient(45deg, #2937f0, #9f1ae2) !important;
+  background: linear-gradient(45deg, #004475, #00CABE) !important;
 }
 
 .font-alt {
@@ -10982,10 +10982,10 @@ section.cta:before {
   display: none;
 }
 .features-device-mockup .circle .gradient-start-color {
-  stop-color: #2937f0;
+  stop-color: #004475;
 }
 .features-device-mockup .circle .gradient-end-color {
-  stop-color: #9f1ae2;
+  stop-color: #00Cabe;
 }
 .features-device-mockup .shape-1 {
   position: absolute;
