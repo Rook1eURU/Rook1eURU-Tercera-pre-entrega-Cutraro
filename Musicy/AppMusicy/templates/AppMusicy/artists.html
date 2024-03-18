@@ -33,6 +33,9 @@ Los expresores de arte.
 {% for artista in artist %}
 <p>
     > {{artista.name}}
+    <button>
+        <a href="{% url 'D_Artistas' artista.name name %}"> Eliminar</a>
+    </button>
 </p>
 {% endfor %}
 

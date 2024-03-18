@@ -28,13 +28,17 @@ Una de las expresiones del arte. ¿Qué buscas?
 </form>
 
 <p>
-    Resultados para: {{title}}
+Resultados para: {{title}}
 </p>
 {% for cancion in song %}
 <p>
     > {{cancion.artist}} - {{cancion.title}} ({{cancion.year}})
+    <button>
+        <a href="{% url 'D_Canciones' cancion.title title %}"> Eliminar</a>
+    </button>
 </p>
 {% endfor %}
+
 
 
 {% endblock %}

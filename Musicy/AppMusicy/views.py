@@ -8,7 +8,10 @@ def inicio(request):
 
     return render(request, "AppMusicy/inicio.html")
 
-# Canciones
+# ---------------------
+# ----- CANCIONES -----
+# ---------------------
+
 def songs_main(request):
 
     return render(request, "AppMusicy/songs.html")
@@ -51,7 +54,18 @@ def r_song(request):
 
     return HttpResponse(respuesta)
 
-# Artistas
+def d_song(request, song_title, title):
+    song = Song.objects.get(title = song_title)
+    song.delete()
+
+    song = Song.objects.filter(title__icontains=title)
+    return render(request, "AppMusicy/songs.html", {"song":song, "title":title})
+
+
+# --------------------
+# ----- ARTISTAS -----
+# --------------------
+
 def artists_main(request):
 
     return render(request, "AppMusicy/artists.html")
@@ -92,8 +106,18 @@ def r_artist(request):
 
     return HttpResponse(respuesta)
 
+def d_artist(request, artist_name, name):
+    artist = Artist.objects.get(name = artist_name)
+    artist.delete()
 
-# Albumes
+    artist = Artist.objects.filter(name__icontains=name)
+    return render(request, "AppMusicy/artists.html", {"artist":artist, "name":name})
+
+
+# -------------------
+# ----- ALBUMES -----
+# -------------------
+
 def albums_main(request):
 
     return render(request, "AppMusicy/albums.html")
@@ -136,7 +160,18 @@ def r_album(request):
 
     return HttpResponse(respuesta)
 
-# Géneros
+def d_album(request, album_title, title):
+    album = Album.objects.get(title = album_title)
+    album.delete()
+
+    album = Album.objects.filter(title__icontains=title)
+    return render(request, "AppMusicy/albums.html", {"album":album, "title":title})
+
+
+# -------------------
+# ----- GÉNEROS -----
+# -------------------
+
 def genres_main(request):
 
     return render(request, "AppMusicy/genres.html")
@@ -175,3 +210,10 @@ def r_genre(request):
         respuesta = "No enviaste datos."
 
     return HttpResponse(respuesta)
+
+def d_genre(request, genre_name, name):
+    genre = Genre.objects.get(name = genre_name)
+    genre.delete()
+
+    genre = Genre.objects.filter(name__icontains=name)
+    return render(request, "AppMusicy/genres.html", {"genre":genre, "name":name})

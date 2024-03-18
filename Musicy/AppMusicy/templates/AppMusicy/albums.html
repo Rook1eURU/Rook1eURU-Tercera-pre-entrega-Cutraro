@@ -33,6 +33,9 @@ Arte en conjunto.
 {% for alboom in album %}
 <p>
     > {{alboom.artist}} - {{alboom.title}} ({{alboom.year}})
+    <button>
+        <a href="{% url 'D_Albumes' alboom.title title %}"> Eliminar</a>
+    </button>
 </p>
 {% endfor %}
 

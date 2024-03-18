@@ -33,6 +33,9 @@ Formas de arte.
 {% for genero in genre %}
 <p>
     > {{genero.name}}
+    <button>
+        <a href="{% url 'D_Géneros' genero.name name %}"> Eliminar</a>
+    </button>
 </p>
 {% endfor %}
 
