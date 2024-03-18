@@ -34,6 +34,9 @@ Arte en conjunto.
 <p>
     > {{alboom.artist}} - {{alboom.title}} ({{alboom.year}})
     <button>
+        <a href="{% url 'U_Albumes' alboom.title title %}"> Editar</a>
+    </button>
+    <button>
         <a href="{% url 'D_Albumes' alboom.title title %}"> Eliminar</a>
     </button>
 </p>

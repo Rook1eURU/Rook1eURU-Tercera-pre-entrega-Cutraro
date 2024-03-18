@@ -14,7 +14,7 @@ def inicio(request):
 
 def songs_main(request):
 
-    return render(request, "AppMusicy/songs.html")
+    return render(request, "AppMusicy/M_songs.html")
 
 def c_song(request):
 
@@ -32,7 +32,7 @@ def c_song(request):
 
             song.save()
 
-            return render(request, "AppMusicy/songs.html")
+            return render(request, "AppMusicy/M_songs.html")
 
     else:
         form = SongFormulario()
@@ -46,7 +46,7 @@ def r_song(request):
         title = request.GET["title"]
         song = Song.objects.filter(title__icontains=title)
 
-        return render(request, "AppMusicy/songs.html", {"song":song, "title":title})
+        return render(request, "AppMusicy/M_songs.html", {"song":song, "title":title})
 
     else:
 
@@ -54,12 +54,43 @@ def r_song(request):
 
     return HttpResponse(respuesta)
 
+def u_song(request, song_title, title):
+    song = Song.objects.get(title = song_title)
+
+    if request.method == "POST":
+        form = SongFormulario(request.POST)
+        print(form)
+
+        if form.is_valid:
+            info = form.cleaned_data
+
+            song.title = info['title']
+            song.album = info['album']
+            song.artist = info['artist']
+            song.year = info['year']
+            song.genre = info['genre']
+
+            song.save()
+
+            song = Song.objects.filter(title__icontains=title)
+            return render(request, "AppMusicy/M_songs.html", {"song":song, "title":title})
+        
+    else:
+
+        form = SongFormulario(initial={'title': song.title,
+                                       'album': song.album,
+                                       'artist': song.artist,
+                                       'year': song.year,
+                                       'genre': song.genre,})
+
+    return render(request, "AppMusicy/U_songs.html", {"form_songs":form, "title":song_title})
+
 def d_song(request, song_title, title):
     song = Song.objects.get(title = song_title)
     song.delete()
 
     song = Song.objects.filter(title__icontains=title)
-    return render(request, "AppMusicy/songs.html", {"song":song, "title":title})
+    return render(request, "AppMusicy/M_songs.html", {"song":song, "title":title})
 
 
 # --------------------
@@ -68,7 +99,7 @@ def d_song(request, song_title, title):
 
 def artists_main(request):
 
-    return render(request, "AppMusicy/artists.html")
+    return render(request, "AppMusicy/M_artists.html")
 
 def c_artist(request):
 
@@ -84,7 +115,7 @@ def c_artist(request):
 
             artist.save()
 
-            return render(request, "AppMusicy/artists.html")
+            return render(request, "AppMusicy/M_artists.html")
 
     else:
         form = ArtistFormulario()
@@ -98,7 +129,7 @@ def r_artist(request):
         name = request.GET["name"]
         artist = Artist.objects.filter(name__icontains=name)
 
-        return render(request, "AppMusicy/artists.html", {"artist":artist, "name":name})
+        return render(request, "AppMusicy/M_artists.html", {"artist":artist, "name":name})
 
     else:
 
@@ -106,12 +137,39 @@ def r_artist(request):
 
     return HttpResponse(respuesta)
 
+def u_artist(request, artist_name, name):
+    artist = Artist.objects.get(name = artist_name)
+
+    if request.method == "POST":
+        form = ArtistFormulario(request.POST)
+        print(form)
+
+        if form.is_valid:
+            info = form.cleaned_data
+
+            artist.name = info['name']
+            artist.songs = info['songs']
+            artist.albums = info['albums']
+
+            artist.save()
+
+            artist = Artist.objects.filter(name__icontains=name)
+            return render(request, "AppMusicy/M_artists.html", {"artist":artist, "name":name})
+        
+    else:
+
+        form = ArtistFormulario(initial={'name': artist.name,
+                                         'songs': artist.songs,
+                                         'albums': artist.albums,})
+
+    return render(request, "AppMusicy/U_artists.html", {"form_artists":form, "name":artist_name})
+
 def d_artist(request, artist_name, name):
     artist = Artist.objects.get(name = artist_name)
     artist.delete()
 
     artist = Artist.objects.filter(name__icontains=name)
-    return render(request, "AppMusicy/artists.html", {"artist":artist, "name":name})
+    return render(request, "AppMusicy/M_artists.html", {"artist":artist, "name":name})
 
 
 # -------------------
@@ -120,7 +178,7 @@ def d_artist(request, artist_name, name):
 
 def albums_main(request):
 
-    return render(request, "AppMusicy/albums.html")
+    return render(request, "AppMusicy/M_albums.html")
 
 def c_album(request):
 
@@ -138,7 +196,7 @@ def c_album(request):
 
             album.save()
 
-            return render(request, "AppMusicy/albums.html")
+            return render(request, "AppMusicy/M_albums.html")
 
     else:
         form = AlbumFormulario()
@@ -152,7 +210,7 @@ def r_album(request):
         title = request.GET["title"]
         album = Album.objects.filter(title__icontains=title)
 
-        return render(request, "AppMusicy/albums.html", {"album":album, "title":title})
+        return render(request, "AppMusicy/M_albums.html", {"album":album, "title":title})
 
     else:
 
@@ -160,12 +218,43 @@ def r_album(request):
 
     return HttpResponse(respuesta)
 
+def u_album(request, album_title, title):
+    album = Album.objects.get(title = album_title)
+
+    if request.method == "POST":
+        form = AlbumFormulario(request.POST)
+        print(form)
+
+        if form.is_valid:
+            info = form.cleaned_data
+
+            album.title = info['title']
+            album.artist = info['artist']
+            album.year = info['year']
+            album.genre = info['genre']
+            album.songs = info['songs']
+
+            album.save()
+
+            album = Album.objects.filter(title__icontains=title)
+            return render(request, "AppMusicy/M_albums.html", {"album":album, "title":title})
+        
+    else:
+
+        form = AlbumFormulario(initial={'title': album.title,
+                                        'artist': album.artist,
+                                        'year': album.year,
+                                        'genre': album.genre,
+                                        'songs': album.songs,})
+
+    return render(request, "AppMusicy/U_albums.html", {"form_albums":form, "title":album_title})
+
 def d_album(request, album_title, title):
     album = Album.objects.get(title = album_title)
     album.delete()
 
     album = Album.objects.filter(title__icontains=title)
-    return render(request, "AppMusicy/albums.html", {"album":album, "title":title})
+    return render(request, "AppMusicy/M_albums.html", {"album":album, "title":title})
 
 
 # -------------------
@@ -174,7 +263,7 @@ def d_album(request, album_title, title):
 
 def genres_main(request):
 
-    return render(request, "AppMusicy/genres.html")
+    return render(request, "AppMusicy/M_genres.html")
 
 def c_genre(request):
 
@@ -189,7 +278,7 @@ def c_genre(request):
 
             genre.save()
 
-            return render(request, "AppMusicy/genres.html")
+            return render(request, "AppMusicy/M_genres.html")
 
     else:
         form = GenreFormulario()
@@ -203,7 +292,7 @@ def r_genre(request):
         name = request.GET["name"]
         genre = Genre.objects.filter(name__icontains=name)
 
-        return render(request, "AppMusicy/genres.html", {"genre":genre, "name":name})
+        return render(request, "AppMusicy/M_genres.html", {"genre":genre, "name":name})
 
     else:
 
@@ -211,9 +300,34 @@ def r_genre(request):
 
     return HttpResponse(respuesta)
 
+def u_genre(request, genre_name, name):
+    genre = Genre.objects.get(name = genre_name)
+
+    if request.method == "POST":
+        form = GenreFormulario(request.POST)
+        print(form)
+
+        if form.is_valid:
+            info = form.cleaned_data
+
+            genre.name = info['name']
+            genre.songs = info['songs']
+
+            genre.save()
+
+            genre = Genre.objects.filter(name__icontains=name)
+            return render(request, "AppMusicy/M_genres.html", {"genre":genre, "name":name})
+        
+    else:
+
+        form = GenreFormulario(initial={'name': genre.name,
+                                        'songs': genre.songs,})
+
+    return render(request, "AppMusicy/U_genres.html", {"form_genres":form, "name":genre_name})
+
 def d_genre(request, genre_name, name):
     genre = Genre.objects.get(name = genre_name)
     genre.delete()
 
     genre = Genre.objects.filter(name__icontains=name)
-    return render(request, "AppMusicy/genres.html", {"genre":genre, "name":name})
+    return render(request, "AppMusicy/M_genres.html", {"genre":genre, "name":name})

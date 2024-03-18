@@ -34,6 +34,9 @@ Resultados para: {{title}}
 <p>
     > {{cancion.artist}} - {{cancion.title}} ({{cancion.year}})
     <button>
+        <a href="{% url 'U_Canciones' cancion.title title %}"> Editar</a>
+    </button>
+    <button>
         <a href="{% url 'D_Canciones' cancion.title title %}"> Eliminar</a>
     </button>
 </p>

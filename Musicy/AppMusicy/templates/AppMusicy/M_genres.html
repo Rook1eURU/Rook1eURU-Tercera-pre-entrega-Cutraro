@@ -5,22 +5,22 @@
 
 <!-- TITULO-->
 {% block titulo %}
-Artistas
+Géneros
 {% endblock %}
 
 <!-- DESCRIPCIÓN-->
 {% block descripcion %}
-Los expresores de arte.
+Formas de arte.
 {% endblock %}
 
 <!-- BUSCADOR-->
 {% block buscador %}
-<form action="/AppMusicy/artistRead/" method="GET"> {% csrf_token %}
+<form action="/AppMusicy/genreRead/" method="GET"> {% csrf_token %}
 
     <input type="text" name="name" id="name">
     <input type="submit" value="Buscar">
     <button>
-        <a href="/AppMusicy/artistCreate/">¿Añadir?</a>
+        <a href="/AppMusicy/genreCreate/">¿Añadir?</a>
     </button>
     
     <br>
@@ -30,11 +30,14 @@ Los expresores de arte.
 <p>
     Resultados para: {{name}}
 </p>
-{% for artista in artist %}
+{% for genero in genre %}
 <p>
-    > {{artista.name}}
+    > {{genero.name}}
     <button>
-        <a href="{% url 'D_Artistas' artista.name name %}"> Eliminar</a>
+        <a href="{% url 'U_Géneros' genero.name name %}"> Editar</a>
+    </button>
+    <button>
+        <a href="{% url 'D_Géneros' genero.name name %}"> Eliminar</a>
     </button>
 </p>
 {% endfor %}
