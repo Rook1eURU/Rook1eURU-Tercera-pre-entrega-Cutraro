@@ -30,6 +30,8 @@ Una de las expresiones del arte. ¿Qué buscas?
 <p>
 Resultados para: {{title}}
 </p>
+
+
 {% for cancion in song %}
 <p>
     > {{cancion.artist}} - {{cancion.title}} ({{cancion.year}})
@@ -41,7 +43,5 @@ Resultados para: {{title}}
     </button>
 </p>
 {% endfor %}
-
-
 
 {% endblock %}

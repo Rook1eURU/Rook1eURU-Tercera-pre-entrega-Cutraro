@@ -13,8 +13,11 @@ def inicio(request):
 # ---------------------
 
 def songs_main(request):
+        
+    title = "Todos"
+    song = Song.objects.all()
 
-    return render(request, "AppMusicy/M_songs.html")
+    return render(request, "AppMusicy/M_songs.html", {"song":song, "title":title})
 
 def c_song(request):
 
@@ -49,10 +52,11 @@ def r_song(request):
         return render(request, "AppMusicy/M_songs.html", {"song":song, "title":title})
 
     else:
+        
+        title = "Todos"
+        song = Song.objects.all()
 
-        respuesta = "No enviaste datos."
-
-    return HttpResponse(respuesta)
+        return render(request, "AppMusicy/M_songs.html", {"song":song, "title":title})
 
 def u_song(request, song_title, title):
     song = Song.objects.get(title = song_title)
@@ -98,8 +102,11 @@ def d_song(request, song_title, title):
 # --------------------
 
 def artists_main(request):
+        
+    name = "Todos"
+    artist = Artist.objects.all()
 
-    return render(request, "AppMusicy/M_artists.html")
+    return render(request, "AppMusicy/M_artists.html", {"artist":artist, "name":name})
 
 def c_artist(request):
 
@@ -132,10 +139,11 @@ def r_artist(request):
         return render(request, "AppMusicy/M_artists.html", {"artist":artist, "name":name})
 
     else:
+        
+        name = "Todos"
+        artist = Artist.objects.all()
 
-        respuesta = "No enviaste datos."
-
-    return HttpResponse(respuesta)
+        return render(request, "AppMusicy/M_artists.html", {"artist":artist, "name":name})
 
 def u_artist(request, artist_name, name):
     artist = Artist.objects.get(name = artist_name)
@@ -177,8 +185,11 @@ def d_artist(request, artist_name, name):
 # -------------------
 
 def albums_main(request):
+        
+    title = "Todos"
+    album = Album.objects.all()
 
-    return render(request, "AppMusicy/M_albums.html")
+    return render(request, "AppMusicy/M_albums.html", {"album":album, "title":title})
 
 def c_album(request):
 
@@ -213,10 +224,11 @@ def r_album(request):
         return render(request, "AppMusicy/M_albums.html", {"album":album, "title":title})
 
     else:
+        
+        title = "Todos"
+        album = Album.objects.all()
 
-        respuesta = "No enviaste datos."
-
-    return HttpResponse(respuesta)
+        return render(request, "AppMusicy/M_albums.html", {"album":album, "title":title})
 
 def u_album(request, album_title, title):
     album = Album.objects.get(title = album_title)
@@ -262,8 +274,11 @@ def d_album(request, album_title, title):
 # -------------------
 
 def genres_main(request):
+        
+    name = "Todos"
+    genre = Genre.objects.all()
 
-    return render(request, "AppMusicy/M_genres.html")
+    return render(request, "AppMusicy/M_genres.html", {"genre":genre, "name":name})
 
 def c_genre(request):
 
@@ -295,10 +310,11 @@ def r_genre(request):
         return render(request, "AppMusicy/M_genres.html", {"genre":genre, "name":name})
 
     else:
+        
+        name = "Todos"
+        genre = Genre.objects.all()
 
-        respuesta = "No enviaste datos."
-
-    return HttpResponse(respuesta)
+        return render(request, "AppMusicy/M_genres.html", {"genre":genre, "name":name})
 
 def u_genre(request, genre_name, name):
     genre = Genre.objects.get(name = genre_name)
