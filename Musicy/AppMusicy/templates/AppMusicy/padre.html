@@ -29,9 +29,33 @@
                     <i class="bi-list"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    {% block categorias %}
+                    
+                    <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+                        {% if request.user.is_authenticated %}
 
-                    {% endblock %}
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Canciones'  %}">Canciones</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Artistas' %}">Artistas</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Albumes' %}">Albumes</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Géneros' %}">Géneros</a></li>
+                        
+                        {% with user.avatar_set.first as img_perfil %}
+
+                        {% if img_perfil %}
+
+                        <a href="{% url 'Edit' %}"><img src="{{img_perfil.imagen.url}}" alt="NO IMAGE" style="max-width: 40px; max-height: 40px;"></a>
+
+                        {% endif %}
+
+                        {% endwith %}
+                    
+                        {% else %}
+
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Register'  %}">Registrarse</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Login'  %}">Iniciar sesión</a></li>
+
+                        {% endif %}
+                    </ul>
+
                 </div>
             </div>
         </nav>

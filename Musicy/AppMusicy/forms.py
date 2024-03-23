@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from AppMusicy.models import Avatar
 
 class SongFormulario(forms.Form):
 
@@ -54,3 +55,10 @@ class EditFormulario(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
         # Saca los mensajes de ayuda
         help_texts = {k:"" for k in fields}
+
+class AvatarFormulario(forms.ModelForm):
+
+    class Meta:
+
+        model = Avatar
+        fields = ["imagen"]

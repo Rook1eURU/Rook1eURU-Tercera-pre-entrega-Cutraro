@@ -3,29 +3,6 @@
 
 {% load static %}
 
-<!-- CATEGORIAS-->
-{% block categorias %}
-
-{% if user %}
-
-<ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-    <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Canciones'  %}">Canciones</a></li>
-    <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Artistas' %}">Artistas</a></li>
-    <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Albumes' %}">Albumes</a></li>
-    <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Géneros' %}">Géneros</a></li>
-</ul>
-
-{% else %}
-
-<ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-    <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Register'  %}">Registrarse</a></li>
-    <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Login'  %}">Iniciar sesión</a></li>
-</ul>
-
-{% endif %}
-
-{% endblock %}
-
 <!-- TITULO-->
 {% block titulo %}
 {{mensaje}}
@@ -34,7 +11,7 @@
 <!-- USUARIO-->
 {% block usuario %}
 
-{% if user %}
+{% if request.user.is_authenticated %}
 
 Bienvenido, {{user}}
 <br></br>

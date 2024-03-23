@@ -11,7 +11,7 @@ from AppMusicy.forms import *
 # Inicio
 def inicio(request):
 
-    return render(request, "AppMusicy/inicio.html", {"mensaje":"Entendiendo la música del mundo.", "user":request.user.username})
+    return render(request, "AppMusicy/inicio.html", {"mensaje":"Entendiendo la música del mundo."}) #, "user":request.user.username
 
 # Inicio de sesión
 def login_request(request):
@@ -93,6 +93,27 @@ def logout_request(request):
 
     return render(request,"AppMusicy/logout.html")
 
+# Agregar avatar
+@login_required
+def add_avatar(request):
+
+    if request.method == "POST":
+
+        form = AvatarFormulario(request.POST, request.FILES)
+        if form.is_valid():
+
+            current_user = User.objects.get(username=request.user)
+            avatar = Avatar(usuario = current_user, imagen = form.cleaned_data["imagen"])
+
+            avatar.save()
+
+            return render(request, "AppMusicy/inicio.html", {"mensaje":"Entendiendo la música del mundo."})
+        
+    else:
+
+        form = AvatarFormulario()
+    
+    return render(request, "AppMusicy/C_avatar.html", {"form":form})
 
 # ---------------------
 # ----- CANCIONES -----

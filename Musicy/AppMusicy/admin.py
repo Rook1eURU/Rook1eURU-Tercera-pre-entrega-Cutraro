@@ -2,6 +2,7 @@ from django.contrib import admin
 from AppMusicy.models import *
 
 # Register your models here.
+admin.site.register(Avatar)
 admin.site.register(Song)
 admin.site.register(Artist)
 admin.site.register(Album)
