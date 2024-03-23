@@ -1,23 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<!-- HERENCIA ENTRE HTMLS-->
+{% extends "AppMusicy\padre.html" %}
+
+{% load static %}
+
+<!-- TITULO-->
+{% block titulo %}
+Albumes
+{% endblock %}
+
+<!-- USUARIO-->
+{% block usuario %}
+
+{% endblock %}
+
+<!-- DESCRIPCIÓN-->
+{% block descripcion %}
+Aquí puedes añadir albumes, a quién corresponden y sus canciones.
+{% endblock %}
+
+<!-- BUSCADOR-->
+{% block buscador %}
     
-    <form action="" method="POST"> {% csrf_token %}
+<form action="" method="POST"> {% csrf_token %}
 
-        <table>
+    <table>
 
-            {{form_albums.as_table}}
+        {{form_albums.as_table}}
 
-        </table>
+    </table>
 
-        <input type="submit" value="Confirmar">
+    <input type="submit" value="Confirmar">
 
-    </form>
+    <br></br>
 
-</body>
-</html>
+    ¿No encuentras algo?
+    <br></br>
+    <button>
+        <a href="/AppMusicy/artistCreate/">Añadir artista</a>
+    </button>
+    <button>
+        <a href="/AppMusicy/songCreate/">Añadir canción</a>
+    </button>
+
+</form>
+
+{% endblock %}

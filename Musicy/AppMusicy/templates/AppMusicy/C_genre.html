@@ -1,23 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<!-- HERENCIA ENTRE HTMLS-->
+{% extends "AppMusicy\padre.html" %}
+
+{% load static %}
+
+<!-- TITULO-->
+{% block titulo %}
+Géneros.
+{% endblock %}
+
+<!-- USUARIO-->
+{% block usuario %}
+
+{% endblock %}
+
+<!-- DESCRIPCIÓN-->
+{% block descripcion %}
+Aquí puedes añadir géneros musicales.
+{% endblock %}
+
+<!-- BUSCADOR-->
+{% block buscador %}
     
-    <form action="" method="POST"> {% csrf_token %}
+<form action="" method="POST"> {% csrf_token %}
 
-        <table>
+    <table>
 
-            {{form_genres.as_table}}
+        {{form_genres.as_table}}
 
-        </table>
+    </table>
 
-        <input type="submit" value="Confirmar">
+    <input type="submit" value="Confirmar">
 
-    </form>
+</form>
 
-</body>
-</html>
+{% endblock %}

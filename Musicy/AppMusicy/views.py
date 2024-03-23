@@ -103,6 +103,8 @@ def add_avatar(request):
         if form.is_valid():
 
             current_user = User.objects.get(username=request.user)
+            avatar_old = Avatar.objects.get(usuario = current_user)
+            avatar_old.delete()
             avatar = Avatar(usuario = current_user, imagen = form.cleaned_data["imagen"])
 
             avatar.save()
