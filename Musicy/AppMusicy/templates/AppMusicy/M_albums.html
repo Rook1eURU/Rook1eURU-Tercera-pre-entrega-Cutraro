@@ -3,6 +3,18 @@
 
 {% load static %}
 
+<!-- CATEGORIAS-->
+{% block categorias %}
+
+<ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+    <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Canciones'  %}">Canciones</a></li>
+    <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Artistas' %}">Artistas</a></li>
+    <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Albumes' %}">Albumes</a></li>
+    <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Géneros' %}">Géneros</a></li>
+</ul>
+
+{% endblock %}
+
 <!-- TITULO-->
 {% block titulo %}
 Albumes

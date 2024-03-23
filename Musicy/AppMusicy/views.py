@@ -1,17 +1,104 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+
 from AppMusicy.models import *
 from AppMusicy.forms import *
 
 # Inicio
 def inicio(request):
 
-    return render(request, "AppMusicy/inicio.html")
+    return render(request, "AppMusicy/inicio.html", {"mensaje":"Entendiendo la música del mundo.", "user":request.user.username})
+
+# Inicio de sesión
+def login_request(request):
+
+    if request.method == "POST":
+        form = AuthenticationForm(request, data = request.POST)
+
+        if form.is_valid():
+            us = form.cleaned_data.get('username')
+            pw = form.cleaned_data.get('password')
+
+            user = authenticate(username = us, password = pw)
+
+            if user is not None:
+                login(request, user)
+
+                return render(request, "AppMusicy/inicio.html", {"mensaje":f"Bienvenido {us}"})
+            else:
+
+                return render(request, "AppMusicy/inicio.html", {"mensaje":"Error, datos incorrectos"})
+
+        else:
+
+            return render(request, "AppMusicy/inicio.html", {"mensaje":"Error, formulario incorrecto"})
+        
+    form = AuthenticationForm()
+
+    return render(request, "AppMusicy/login.html", {"form":form})
+
+# Registro
+def register(request):
+
+      if request.method == 'POST':
+
+            #form = UserCreationForm(request.POST)
+            form = UserRegisterForm(request.POST)
+            if form.is_valid():
+
+                  username = form.cleaned_data['username']
+                  form.save()
+                  return render(request,"AppMusicy/inicio.html" ,  {"mensaje":"Usuario creado", "user":"nuevo usuario."})
+
+      else:
+            #form = UserCreationForm()       
+            form = UserRegisterForm()     
+
+      return render(request,"AppMusicy/registro.html" ,  {"form":form})
+
+# Editar perfil
+def edit_user(request):
+
+    usuario = request.user
+
+    if request.method == "POST":
+
+        form = EditFormulario(request.POST)
+        if form.is_valid():
+
+            info = form.cleaned_data
+
+            usuario.username = info['username']
+            usuario.email = info['email']
+            usuario.set_password(info['password1'])
+
+            usuario.save()
+
+            return render(request, "AppMusicy/inicio.html", {"mensaje":"Entendiendo la música del mundo."})
+        
+    else:
+
+        form = EditFormulario(initial={'username': usuario.username,
+                                       'email': usuario.email,})
+    
+    return render(request, "AppMusicy/editarPerfil.html", {"form":form, "usuario":usuario})
+
+# Logout
+def logout_request(request):
+    logout(request)
+
+    return render(request,"AppMusicy/logout.html")
+
 
 # ---------------------
 # ----- CANCIONES -----
 # ---------------------
 
+@login_required
 def songs_main(request):
         
     title = "Todos"
@@ -19,6 +106,7 @@ def songs_main(request):
 
     return render(request, "AppMusicy/M_songs.html", {"song":song, "title":title})
 
+@login_required
 def c_song(request):
 
     # Almaceno en tablas los formularios
@@ -35,13 +123,17 @@ def c_song(request):
 
             song.save()
 
-            return render(request, "AppMusicy/M_songs.html")
+        
+            title = "Todos"
+            song = Song.objects.all()
+            return render(request, "AppMusicy/M_songs.html", {"song":song, "title":title})
 
     else:
         form = SongFormulario()
 
     return render(request, "AppMusicy/C_songs.html", {"form_songs":form})
 
+@login_required
 def r_song(request):
 
     if request.GET["title"]:
@@ -58,6 +150,7 @@ def r_song(request):
 
         return render(request, "AppMusicy/M_songs.html", {"song":song, "title":title})
 
+@login_required
 def u_song(request, song_title, title):
     song = Song.objects.get(title = song_title)
 
@@ -76,7 +169,10 @@ def u_song(request, song_title, title):
 
             song.save()
 
-            song = Song.objects.filter(title__icontains=title)
+            if title != "Todos":
+                song = Song.objects.filter(title__icontains=title)
+            else:
+                song = Song.objects.all()
             return render(request, "AppMusicy/M_songs.html", {"song":song, "title":title})
         
     else:
@@ -89,11 +185,15 @@ def u_song(request, song_title, title):
 
     return render(request, "AppMusicy/U_songs.html", {"form_songs":form, "title":song_title})
 
+@login_required
 def d_song(request, song_title, title):
     song = Song.objects.get(title = song_title)
     song.delete()
 
-    song = Song.objects.filter(title__icontains=title)
+    if title != "Todos":
+        song = Song.objects.filter(title__icontains=title)
+    else:
+        song = Song.objects.all()
     return render(request, "AppMusicy/M_songs.html", {"song":song, "title":title})
 
 
@@ -101,6 +201,7 @@ def d_song(request, song_title, title):
 # ----- ARTISTAS -----
 # --------------------
 
+@login_required
 def artists_main(request):
         
     name = "Todos"
@@ -108,6 +209,7 @@ def artists_main(request):
 
     return render(request, "AppMusicy/M_artists.html", {"artist":artist, "name":name})
 
+@login_required
 def c_artist(request):
 
     # Almaceno en tablas los formularios
@@ -122,13 +224,16 @@ def c_artist(request):
 
             artist.save()
 
-            return render(request, "AppMusicy/M_artists.html")
+            name = "Todos"
+            artist = Artist.objects.all()
+            return render(request, "AppMusicy/M_artists.html", {"artist":artist, "name":name})
 
     else:
         form = ArtistFormulario()
 
     return render(request, "AppMusicy/C_artist.html", {"form_artists":form})
 
+@login_required
 def r_artist(request):
 
     if request.GET["name"]:
@@ -145,6 +250,7 @@ def r_artist(request):
 
         return render(request, "AppMusicy/M_artists.html", {"artist":artist, "name":name})
 
+@login_required
 def u_artist(request, artist_name, name):
     artist = Artist.objects.get(name = artist_name)
 
@@ -161,7 +267,10 @@ def u_artist(request, artist_name, name):
 
             artist.save()
 
-            artist = Artist.objects.filter(name__icontains=name)
+            if name != "Todos":
+                artist = Artist.objects.filter(name__icontains=name)
+            else:
+                artist = Artist.objects.all()
             return render(request, "AppMusicy/M_artists.html", {"artist":artist, "name":name})
         
     else:
@@ -172,11 +281,15 @@ def u_artist(request, artist_name, name):
 
     return render(request, "AppMusicy/U_artists.html", {"form_artists":form, "name":artist_name})
 
+@login_required
 def d_artist(request, artist_name, name):
     artist = Artist.objects.get(name = artist_name)
     artist.delete()
 
-    artist = Artist.objects.filter(name__icontains=name)
+    if name != "Todos":
+        artist = Artist.objects.filter(name__icontains=name)
+    else:
+        artist = Artist.objects.all()
     return render(request, "AppMusicy/M_artists.html", {"artist":artist, "name":name})
 
 
@@ -184,6 +297,7 @@ def d_artist(request, artist_name, name):
 # ----- ALBUMES -----
 # -------------------
 
+@login_required
 def albums_main(request):
         
     title = "Todos"
@@ -191,6 +305,7 @@ def albums_main(request):
 
     return render(request, "AppMusicy/M_albums.html", {"album":album, "title":title})
 
+@login_required
 def c_album(request):
 
     # Almaceno en tablas los formularios
@@ -207,13 +322,16 @@ def c_album(request):
 
             album.save()
 
-            return render(request, "AppMusicy/M_albums.html")
+            title = "Todos"
+            album = Album.objects.all()
+            return render(request, "AppMusicy/M_albums.html", {"album":album, "title":title})
 
     else:
         form = AlbumFormulario()
 
     return render(request, "AppMusicy/C_album.html", {"form_albums":form})
 
+@login_required
 def r_album(request):
 
     if request.GET["title"]:
@@ -230,6 +348,7 @@ def r_album(request):
 
         return render(request, "AppMusicy/M_albums.html", {"album":album, "title":title})
 
+@login_required
 def u_album(request, album_title, title):
     album = Album.objects.get(title = album_title)
 
@@ -248,7 +367,10 @@ def u_album(request, album_title, title):
 
             album.save()
 
-            album = Album.objects.filter(title__icontains=title)
+            if title != "Todos":
+                album = Album.objects.filter(title__icontains=title)
+            else:
+                album = Album.objects.all()
             return render(request, "AppMusicy/M_albums.html", {"album":album, "title":title})
         
     else:
@@ -261,11 +383,15 @@ def u_album(request, album_title, title):
 
     return render(request, "AppMusicy/U_albums.html", {"form_albums":form, "title":album_title})
 
+@login_required
 def d_album(request, album_title, title):
     album = Album.objects.get(title = album_title)
     album.delete()
 
-    album = Album.objects.filter(title__icontains=title)
+    if title != "Todos":
+        album = Album.objects.filter(title__icontains=title)
+    else:
+        album = Album.objects.all()
     return render(request, "AppMusicy/M_albums.html", {"album":album, "title":title})
 
 
@@ -273,6 +399,7 @@ def d_album(request, album_title, title):
 # ----- GÉNEROS -----
 # -------------------
 
+@login_required
 def genres_main(request):
         
     name = "Todos"
@@ -280,6 +407,7 @@ def genres_main(request):
 
     return render(request, "AppMusicy/M_genres.html", {"genre":genre, "name":name})
 
+@login_required
 def c_genre(request):
 
     # Almaceno en tablas los formularios
@@ -293,13 +421,16 @@ def c_genre(request):
 
             genre.save()
 
-            return render(request, "AppMusicy/M_genres.html")
+            name = "Todos"
+            genre = Genre.objects.all()
+            return render(request, "AppMusicy/M_genres.html", {"genre":genre, "name":name})
 
     else:
         form = GenreFormulario()
 
     return render(request, "AppMusicy/C_genre.html", {"form_genres":form})
 
+@login_required
 def r_genre(request):
 
     if request.GET["name"]:
@@ -316,6 +447,7 @@ def r_genre(request):
 
         return render(request, "AppMusicy/M_genres.html", {"genre":genre, "name":name})
 
+@login_required
 def u_genre(request, genre_name, name):
     genre = Genre.objects.get(name = genre_name)
 
@@ -331,7 +463,10 @@ def u_genre(request, genre_name, name):
 
             genre.save()
 
-            genre = Genre.objects.filter(name__icontains=name)
+            if name != "Todos":
+                genre = Genre.objects.filter(name__icontains=name)
+            else:
+                genre = Genre.objects.all()
             return render(request, "AppMusicy/M_genres.html", {"genre":genre, "name":name})
         
     else:
@@ -341,9 +476,13 @@ def u_genre(request, genre_name, name):
 
     return render(request, "AppMusicy/U_genres.html", {"form_genres":form, "name":genre_name})
 
+@login_required
 def d_genre(request, genre_name, name):
     genre = Genre.objects.get(name = genre_name)
     genre.delete()
 
-    genre = Genre.objects.filter(name__icontains=name)
+    if name != "Todos":
+        genre = Genre.objects.filter(name__icontains=name)
+    else:
+        genre = Genre.objects.all()
     return render(request, "AppMusicy/M_genres.html", {"genre":genre, "name":name})

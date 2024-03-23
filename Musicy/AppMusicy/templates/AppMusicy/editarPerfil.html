@@ -1,0 +1,31 @@
+<!-- HERENCIA ENTRE HTMLS-->
+{% extends "AppMusicy\padre.html" %}
+
+{% load static %}
+
+<!-- TITULO-->
+{% block titulo %}
+Entendiendo la música del mundo.
+{% endblock %}
+
+<!-- DESCRIPCIÓN-->
+{% block descripcion %}
+
+Editando usuario
+
+{% endblock %}
+
+<!-- BUSCADOR-->
+{% block buscador %}
+
+<form action="" method="POST">
+
+    {% csrf_token %}
+
+        {{ form.as_p }}
+    
+        <button type="submit">Editar</button>
+
+</form>
+
+{% endblock %}

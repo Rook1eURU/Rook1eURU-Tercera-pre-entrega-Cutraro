@@ -3,9 +3,54 @@
 
 {% load static %}
 
+<!-- CATEGORIAS-->
+{% block categorias %}
+
+{% if user %}
+
+<ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+    <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Canciones'  %}">Canciones</a></li>
+    <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Artistas' %}">Artistas</a></li>
+    <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Albumes' %}">Albumes</a></li>
+    <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Géneros' %}">Géneros</a></li>
+</ul>
+
+{% else %}
+
+<ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+    <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Register'  %}">Registrarse</a></li>
+    <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Login'  %}">Iniciar sesión</a></li>
+</ul>
+
+{% endif %}
+
+{% endblock %}
+
 <!-- TITULO-->
 {% block titulo %}
-Entendiendo la música del mundo.
+{{mensaje}}
+{% endblock %}
+
+<!-- USUARIO-->
+{% block usuario %}
+
+{% if user %}
+
+Bienvenido, {{user}}
+<br></br>
+<button>
+    <a href="{% url 'Edit' %}"> Editar usuario</a>
+</button>
+<button>
+    <a href="{% url 'Logout' %}"> Cerrar sesión</a>
+</button>
+
+{% else %}
+
+Por favor inicie sesión o registrese para acceder al sitio.
+
+{% endif %}
+
 {% endblock %}
 
 <!-- DESCRIPCIÓN-->

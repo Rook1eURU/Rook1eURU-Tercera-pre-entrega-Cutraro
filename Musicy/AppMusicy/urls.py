@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.auth.views import LogoutView
 
 # Mis vistas
 from AppMusicy.views import *
@@ -6,6 +7,10 @@ from AppMusicy.views import *
 urlpatterns = [
     # Main
     path('', inicio, name="Inicio"),
+    path('login/', login_request, name="Login"),
+    path('register/', register, name="Register"),
+    path('edit/', edit_user, name="Edit"),
+    path('logout/', logout_request, name="Logout"),
 
     # Canciones
     path('songs/', songs_main, name="Canciones"),

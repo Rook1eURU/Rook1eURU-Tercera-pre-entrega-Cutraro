@@ -29,12 +29,9 @@
                     <i class="bi-list"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Canciones'  %}">Canciones</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Artistas' %}">Artistas</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Albumes' %}">Albumes</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="{% url 'Géneros' %}">Géneros</a></li>
-                    </ul>
+                    {% block categorias %}
+
+                    {% endblock %}
                 </div>
             </div>
         </nav>
@@ -52,6 +49,13 @@
                                 {% endblock %}
 
                             </h1>
+                            <p class="lead fw-normal text-muted mb-5">
+                            
+                                {% block usuario %}
+                                
+                                {% endblock %}
+
+                            </p>
                             <p class="lead fw-normal text-muted mb-5">
                             
                                 {% block descripcion %}
