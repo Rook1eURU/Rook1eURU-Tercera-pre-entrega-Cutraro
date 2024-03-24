@@ -12,6 +12,7 @@ urlpatterns = [
     path('edit/', edit_user, name="Edit"),
     path('logout/', logout_request, name="Logout"),
     path('avatar/', add_avatar, name="Avatar"),
+    path('aboutme/', about, name="About"),
 
     # Canciones
     path('songs/', songs_main, name="Canciones"),

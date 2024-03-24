@@ -103,8 +103,13 @@ def add_avatar(request):
         if form.is_valid():
 
             current_user = User.objects.get(username=request.user)
-            avatar_old = Avatar.objects.get(usuario = current_user)
-            avatar_old.delete()
+
+            try:
+                if Avatar.objects.get(usuario = current_user):
+                    Avatar.objects.get(usuario = current_user).delete()
+            except:
+                pass
+
             avatar = Avatar(usuario = current_user, imagen = form.cleaned_data["imagen"])
 
             avatar.save()
@@ -116,6 +121,11 @@ def add_avatar(request):
         form = AvatarFormulario()
     
     return render(request, "AppMusicy/C_avatar.html", {"form":form})
+
+# About me
+def about(request):
+
+    return render(request, "AppMusicy/aboutme.html")
 
 # ---------------------
 # ----- CANCIONES -----
