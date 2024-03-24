@@ -19,6 +19,7 @@ urlpatterns = [
     path('songRead/', r_song, name="R_Canciones"),
     path('songUpdate/<song_title>/<title>/', u_song, name="U_Canciones"),
     path('songDelete/<song_title>/<title>/', d_song, name="D_Canciones"),
+    path('songShow/<song_title>/', show_song, name="S_Canción"),
     
     # Artistas
     path('artists/', artists_main, name="Artistas"),

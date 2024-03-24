@@ -11,7 +11,7 @@ from AppMusicy.forms import *
 # Inicio
 def inicio(request):
 
-    return render(request, "AppMusicy/inicio.html", {"mensaje":"Entendiendo la música del mundo."}) #, "user":request.user.username
+    return render(request, "AppMusicy/inicio.html", {"mensaje":"Entendiendo la música del mundo."}) #, "user":request.user.username | "desc":"Por favor inicie sesión o registrese para acceder al sitio."
 
 # Inicio de sesión
 def login_request(request):
@@ -52,13 +52,13 @@ def register(request):
 
                   username = form.cleaned_data['username']
                   form.save()
-                  return render(request,"AppMusicy/inicio.html" ,  {"mensaje":"Usuario creado", "user":"nuevo usuario."})
+                  return render(request,"AppMusicy/inicio.html",  {"mensaje":"Usuario creado", "user":"nuevo usuario.", "desc":"¡Gracias por registrarte!"})
 
       else:
             #form = UserCreationForm()       
             form = UserRegisterForm()     
 
-      return render(request,"AppMusicy/registro.html" ,  {"form":form})
+      return render(request,"AppMusicy/registro.html",  {"form":form})
 
 # Editar perfil
 def edit_user(request):
@@ -142,7 +142,10 @@ def c_song(request):
                          artist=info["artist"],
                          album=info["album"],
                          year=info["year"],
-                         genre=info["genre"],)
+                         genre=info["genre"],
+                         link=info['link'],
+                         lyrics=info["lyrics"],
+                         translation=info["translation"],)
 
             song.save()
 
@@ -189,6 +192,9 @@ def u_song(request, song_title, title):
             song.artist = info['artist']
             song.year = info['year']
             song.genre = info['genre']
+            song.link = info['link']
+            song.lyrics = info['lyrics']
+            song.translation = info['translation']
 
             song.save()
 
@@ -204,7 +210,10 @@ def u_song(request, song_title, title):
                                        'album': song.album,
                                        'artist': song.artist,
                                        'year': song.year,
-                                       'genre': song.genre,})
+                                       'genre': song.genre,
+                                       'link': song.link,
+                                       'lyrics': song.lyrics,
+                                       'translation': song.translation,})
 
     return render(request, "AppMusicy/U_songs.html", {"form_songs":form, "title":song_title})
 
@@ -218,6 +227,12 @@ def d_song(request, song_title, title):
     else:
         song = Song.objects.all()
     return render(request, "AppMusicy/M_songs.html", {"song":song, "title":title})
+
+@login_required
+def show_song(request, song_title):
+    song = Song.objects.get(title = song_title)
+
+    return render(request, "AppMusicy/R_song.html", {"song":song, "title":song_title})
 
 
 # --------------------
@@ -241,9 +256,7 @@ def c_artist(request):
 
         if form.is_valid():
             info = form.cleaned_data
-            artist = Artist(name=info["name"],
-                          songs=info["songs"],
-                          albums=info["albums"],)
+            artist = Artist(name=info["name"],)
 
             artist.save()
 
@@ -285,8 +298,6 @@ def u_artist(request, artist_name, name):
             info = form.cleaned_data
 
             artist.name = info['name']
-            artist.songs = info['songs']
-            artist.albums = info['albums']
 
             artist.save()
 
@@ -298,9 +309,7 @@ def u_artist(request, artist_name, name):
         
     else:
 
-        form = ArtistFormulario(initial={'name': artist.name,
-                                         'songs': artist.songs,
-                                         'albums': artist.albums,})
+        form = ArtistFormulario(initial={'name': artist.name,})
 
     return render(request, "AppMusicy/U_artists.html", {"form_artists":form, "name":artist_name})
 
@@ -339,9 +348,7 @@ def c_album(request):
             info = form.cleaned_data
             album = Album(title=info["title"],
                           artist=info["artist"],
-                          year=info["year"],
-                          genre=info["genre"],
-                          songs=info["songs"],)
+                          year=info["year"],)
 
             album.save()
 
@@ -385,8 +392,6 @@ def u_album(request, album_title, title):
             album.title = info['title']
             album.artist = info['artist']
             album.year = info['year']
-            album.genre = info['genre']
-            album.songs = info['songs']
 
             album.save()
 
@@ -400,9 +405,7 @@ def u_album(request, album_title, title):
 
         form = AlbumFormulario(initial={'title': album.title,
                                         'artist': album.artist,
-                                        'year': album.year,
-                                        'genre': album.genre,
-                                        'songs': album.songs,})
+                                        'year': album.year,})
 
     return render(request, "AppMusicy/U_albums.html", {"form_albums":form, "title":album_title})
 
@@ -439,8 +442,7 @@ def c_genre(request):
 
         if form.is_valid():
             info = form.cleaned_data
-            genre = Genre(name=info["name"],
-                          songs=info["songs"],)
+            genre = Genre(name=info["name"],)
 
             genre.save()
 
@@ -482,7 +484,6 @@ def u_genre(request, genre_name, name):
             info = form.cleaned_data
 
             genre.name = info['name']
-            genre.songs = info['songs']
 
             genre.save()
 
@@ -494,8 +495,7 @@ def u_genre(request, genre_name, name):
         
     else:
 
-        form = GenreFormulario(initial={'name': genre.name,
-                                        'songs': genre.songs,})
+        form = GenreFormulario(initial={'name': genre.name,})
 
     return render(request, "AppMusicy/U_genres.html", {"form_genres":form, "name":genre_name})
 

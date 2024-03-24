@@ -1,34 +1,32 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from AppMusicy.models import Avatar
+from AppMusicy.models import *
 
 class SongFormulario(forms.Form):
 
     title = forms.CharField()
-    artist = forms.CharField()
-    album = forms.CharField()
+    artist = forms.ModelChoiceField(queryset=Artist.objects.all())
+    album = forms.ModelChoiceField(queryset=Album.objects.all())
     year = forms.IntegerField()
-    genre = forms.CharField()
+    genre = forms.ModelChoiceField(queryset=Genre.objects.all())
+    link = forms.CharField()
+    lyrics = forms.CharField(widget=forms.Textarea)
+    translation = forms.CharField(widget=forms.Textarea)
 
 class ArtistFormulario(forms.Form):
 
     name = forms.CharField()
-    songs = forms.CharField()
-    albums = forms.CharField()
 
 class AlbumFormulario(forms.Form):
 
     title = forms.CharField()
-    artist = forms.CharField()
+    artist = forms.ModelChoiceField(queryset=Artist.objects.all())
     year = forms.IntegerField()
-    genre = forms.CharField()
-    songs = forms.CharField()
 
 class GenreFormulario(forms.Form):
 
     name = forms.CharField()
-    songs = forms.CharField()
 
 class UserRegisterForm(UserCreationForm):
 

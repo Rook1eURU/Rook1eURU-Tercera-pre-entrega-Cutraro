@@ -1,0 +1,42 @@
+<!-- HERENCIA ENTRE HTMLS-->
+{% extends "AppMusicy\padre.html" %}
+
+{% load static %}
+
+<!-- TITULO-->
+{% block titulo %}
+{{song.title}}
+{% endblock %}
+
+<!-- VIDEO-->
+{% block usuario %}
+
+    <iframe width="576" height="324"
+    src="https://www.youtube.com/embed/{{song.link}}">
+    </iframe>
+
+{% endblock %}
+
+<!-- DESCRIPCIÓN-->
+{% block descripcion %}
+{{song.title}} | {{song.album}}
+{% endblock %}
+
+<!-- BUSCADOR-->
+{% block buscador %}
+{{song.lyrics|linebreaks}}
+{% endblock %}
+
+
+<!-- TELEFONITO-->
+{% block fono %}
+
+<div class="col-lg-6">
+    <p class="lead fw-normal text-muted mb-5">
+    
+    {{song.translation|linebreaks}}
+
+    </p>
+</div>
+
+{% endblock %}

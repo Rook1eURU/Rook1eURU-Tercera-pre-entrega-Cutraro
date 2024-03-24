@@ -34,7 +34,9 @@ Resultados para: {{title}}
 
 {% for cancion in song %}
 <p>
+    <a href="{% url 'S_Canción' cancion.title %}">
     > {{cancion.artist}} - {{cancion.title}} ({{cancion.year}})
+    </a>
     <button>
         <a href="{% url 'U_Canciones' cancion.title title %}"> Editar</a>
     </button>
@@ -43,5 +45,27 @@ Resultados para: {{title}}
     </button>
 </p>
 {% endfor %}
+
+{% endblock %}
+
+<!-- TELEFONITO-->
+{% block fono %}
+
+<div class="col-lg-6">
+    <!-- Masthead device mockup feature-->
+    <div class="masthead-device-mockup">
+        <div class="device-wrapper">
+            <div class="device" data-device="iPhoneX" data-orientation="portrait" data-color="black">
+                <div class="screen bg-black">
+                    <!-- PUT CONTENTS HERE:-->
+                    <!-- * * This can be a video, image, or just about anything else.-->
+                    <!-- * * Set the max width of your media to 100% and the height to-->
+                    <!-- * * 100% like the demo example below.-->
+                    <video muted="muted" autoplay="" loop="" style="max-width: 100%; height: 100%"><source src="{% static 'AppMusicy/assets/img/MobilMusicy2.mp4' %}" type="video/mp4" /></video>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
